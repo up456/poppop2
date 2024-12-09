@@ -1,0 +1,36 @@
+{
+  "name": "react-pop-effect",
+  "version": "1.0.0",
+  "description": "React component that makes children elements pop with random animation effects",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "animation",
+    "effect",
+    "pop",
+    "component"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^4.9.5",
+    "rollup": "^2.79.1",
+    "@rollup/plugin-typescript": "^8.5.0",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "tslib": "^2.5.0"
+  }
+}
