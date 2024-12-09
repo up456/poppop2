@@ -1,0 +1,70 @@
+/* 요소가 날아가면서 사라지는 애니메이션 */
+@keyframes parabolic-fall {
+  /* 시작: 원래 위치 */
+  0% {
+    transform: translate(var(--start-x), var(--start-y)) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  /* 중간: 포물선의 정점 */
+  50% {
+    transform: translate(
+        calc(var(--start-x) + (var(--final-x) - var(--start-x)) * 0.5),
+        var(--peak-y)
+      )
+      scale(var(--scale)) rotate(calc(var(--rotation) * 0.5));
+  }
+  /* 끝: 목표 위치에서 사라짐 */
+  100% {
+    transform: translate(var(--final-x), var(--final-y)) scale(var(--scale))
+      rotate(var(--rotation));
+    opacity: var(--final-opacity);
+  }
+}
+
+/* 요소가 날아가서 바닥에 쌓이는 애니메이션 */
+@keyframes parabolic-stack {
+  /* 시작: 원래 위치 */
+  0% {
+    transform: translate(var(--start-x), var(--start-y)) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  /* 중간: 포물선의 정점 */
+  50% {
+    transform: translate(
+        calc(var(--start-x) + (var(--final-x) - var(--start-x)) * 0.5),
+        var(--peak-y)
+      )
+      scale(var(--scale)) rotate(calc(var(--rotation) * 0.5));
+  }
+  /* 착지 직전: 약간 위에서 바운스 효과 */
+  85% {
+    transform: translate(var(--final-x), calc(var(--final-y) - 50px))
+      scale(var(--scale)) rotate(calc(var(--rotation) * 0.85));
+  }
+  /* 끝: 바닥에 안착 */
+  100% {
+    transform: translate(var(--final-x), var(--final-y)) scale(var(--scale))
+      rotate(var(--rotation));
+    opacity: 1;
+  }
+}
+
+/* 컨테이너 스타일 */
+.pop-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* 클릭 가능한 트리거 영역 스타일 */
+.pop-trigger {
+  cursor: pointer;
+}
+
+/* 복제된 요소의 기본 스타일 */
+.pop-clone {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none; /* 마우스 이벤트 무시 */
+  z-index: 1000; /* 다른 요소들 위에 표시 */
+}
