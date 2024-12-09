@@ -10,7 +10,9 @@ export const calculateCloneStyle = (
   clientX: number,
   clientY: number,
   stackOnGround: boolean,
-  groundY: number
+  groundY: number,
+  elementWidth: number,
+  elementHeight: number
 ): Pick<CloneItem, "style" | "finalPosition"> => {
   const scale = getRandomValue(0.3, 1)
   const duration = getRandomValue(1, 1.5)
@@ -21,12 +23,12 @@ export const calculateCloneStyle = (
 
   return {
     style: {
-      transform: `translate(${clientX}px, ${clientY}px)`,
+      transform: `translate(${clientX - elementWidth / 2}px, ${clientY - elementHeight / 2}px)`,
       animation: stackOnGround
         ? `parabolic-stack ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`
         : `parabolic-fall ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`,
-      "--start-x": `${clientX}px`,
-      "--start-y": `${clientY}px`,
+      "--start-x": `${clientX - elementWidth / 2}px`,
+      "--start-y": `${clientY - elementHeight / 2}px`,
       "--final-x": `${finalX}px`,
       "--final-y": `${finalY}px`,
       "--peak-y": `${clientY - getRandomValue(200, 400)}px`,

@@ -18,13 +18,22 @@ const PopChildren: React.FC<PopEffectProps> = ({
   const containerRef = useRef<HTMLDivElement>(null) // 컨테이너 참조
   const mousePositionRef = useRef({ x: 0, y: 0 }) // 마우스 위치 정보
   const duration = 1.5 // 요소 유지 시간
+  const elementWidth = containerRef.current?.clientWidth ?? 0 // 요소 너비
+  const elementHeight = containerRef.current?.clientHeight ?? 0 // 요소 높이
 
   // 복제 요소 생성 함수
   const createClone = useCallback(
     (clientX: number, clientY: number) => {
       if (!containerRef.current) return
 
-      const { style, finalPosition } = calculateCloneStyle(clientX, clientY, stackOnGround, groundY)
+      const { style, finalPosition } = calculateCloneStyle(
+        clientX,
+        clientY,
+        stackOnGround,
+        groundY,
+        elementWidth,
+        elementHeight
+      )
 
       const newClone: CloneItem = {
         createdAt: Date.now() + Math.random(),
