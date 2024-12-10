@@ -18,8 +18,8 @@ const PopChildren: React.FC<PopEffectProps> = ({
   const containerRef = useRef<HTMLDivElement>(null) // 컨테이너 참조
   const mousePositionRef = useRef({ x: 0, y: 0 }) // 마우스 위치 정보
   const duration = 1.5 // 요소 유지 시간
-  const elementWidth = containerRef.current?.clientWidth ?? 0 // 요소 너비
-  const elementHeight = containerRef.current?.clientHeight ?? 0 // 요소 높이
+  const [elementWidth, setElementWidth] = useState(0) // 요소 너비
+  const [elementHeight, setElementHeight] = useState(0) // 요소 높이
 
   // 복제 요소 생성 함수
   const createClone = useCallback(
@@ -48,7 +48,7 @@ const PopChildren: React.FC<PopEffectProps> = ({
           : getPersistentClones(updatedClones, duration)
       })
     },
-    [groundY, maxStackedItems]
+    [groundY, maxStackedItems, elementWidth, elementHeight]
   )
 
   // 연속 생성 시작 함수 (마우스를 누르고 있는 동안 생성)
@@ -100,6 +100,14 @@ const PopChildren: React.FC<PopEffectProps> = ({
     },
     [stopCreatingClones]
   )
+
+  // DOM이 마운트된 후 크기를 업데이트
+  useEffect(() => {
+    if (containerRef.current) {
+      setElementWidth(containerRef.current.clientWidth)
+      setElementHeight(containerRef.current.clientHeight)
+    }
+  }, [containerRef.current])
 
   // 전역 마우스 이벤트 리스너 설정
   useEffect(() => {
