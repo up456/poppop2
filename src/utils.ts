@@ -25,8 +25,8 @@ export const calculateCloneStyle = (
     style: {
       transform: `translate(${clientX - elementWidth / 2}px, ${clientY - elementHeight / 2}px)`,
       animation: stackOnGround
-        ? `parabolic-stack ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`
-        : `parabolic-fall ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`,
+        ? `explosive-stack ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`
+        : `explosive-fall ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`,
       "--start-x": `${clientX - elementWidth / 2}px`,
       "--start-y": `${clientY - elementHeight / 2}px`,
       "--final-x": `${finalX}px`,
