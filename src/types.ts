@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { AnimationEnum } from "./utils"
 
 // 컴포넌트 Props 타입 정의
 export interface PopEffectProps {
@@ -7,6 +8,7 @@ export interface PopEffectProps {
   groundY?: number // 바닥 위치 (px)
   maxStackedItems?: number // 최대 쌓이는 아이템 수
   spawnInterval?: number // 생성 간격 (ms)
+  animationType?: AnimationEnum // 애니메이션 타입
 }
 
 // 복제된 요소의 상태 타입 정의

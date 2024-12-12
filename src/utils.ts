@@ -1,12 +1,22 @@
 import { CloneItem, MouseOrTouchEvent, GlobalMouseOrTouchEvent, Position } from "./types"
 
-// 랜덤 값 생성 유틸리티 함수
-export const getRandomValue = (min: number, max: number): number => {
-  return Math.random() * (max - min) + min
+// 애니메이션 타입을 관리하는 enum 추가
+export enum AnimationEnum {
+  EXPLOSIVE = "explosive",
+}
+
+// 애니메이션 타입에 따라 적절한 스타일 계산 함수를 반환하는 팩토리 함수
+export const getAnimationStyleCalculator = (type: AnimationEnum) => {
+  switch (type) {
+    case AnimationEnum.EXPLOSIVE:
+      return calculateExplosiveCloneStyle
+    default:
+      return calculateExplosiveCloneStyle
+  }
 }
 
 // 복제된 요소의 스타일 계산 함수
-export const calculateCloneStyle = (
+export const calculateExplosiveCloneStyle = (
   clientX: number,
   clientY: number,
   stackOnGround: boolean,
@@ -62,4 +72,9 @@ export const getStackedClones = (clones: CloneItem[], maxItems: number): CloneIt
 // 사라지지 않고 보여지는 요소들을 반환하는 함수
 export const getPersistentClones = (clones: CloneItem[], duration: number): CloneItem[] => {
   return clones.filter((clone) => Date.now() - clone.createdAt < duration * 1000)
+}
+
+// 랜덤 값 생성 유틸리티 함수
+export const getRandomValue = (min: number, max: number): number => {
+  return Math.random() * (max - min) + min
 }

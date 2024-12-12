@@ -1,6 +1,12 @@
 import React, { useState, useCallback, useRef, useEffect } from "react"
 import { PopEffectProps, CloneItem } from "../types"
-import { calculateCloneStyle, getPositionFromEvent, getStackedClones, getPersistentClones } from "../utils"
+import {
+  getPositionFromEvent,
+  getStackedClones,
+  getPersistentClones,
+  getAnimationStyleCalculator,
+  AnimationEnum,
+} from "../utils"
 import "../styles/PopChildren.css"
 
 // 메인 컴포넌트
@@ -10,6 +16,7 @@ const PopChildren: React.FC<PopEffectProps> = ({
   groundY = window.innerHeight - 100,
   maxStackedItems = 50,
   spawnInterval = 50,
+  animationType = AnimationEnum.EXPLOSIVE,
 }) => {
   // 상태 및 ref 관리
   const [clones, setClones] = useState<CloneItem[]>([])
@@ -26,7 +33,7 @@ const PopChildren: React.FC<PopEffectProps> = ({
     (clientX: number, clientY: number) => {
       if (!containerRef.current) return
 
-      const { style, finalPosition } = calculateCloneStyle(
+      const { style, finalPosition } = getAnimationStyleCalculator(animationType)(
         clientX,
         clientY,
         stackOnGround,
