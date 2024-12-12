@@ -22,7 +22,7 @@ export const getAnimationStyleCalculator = (type: AnimationEnum) => {
 export const calculateExplosiveCloneStyle = (
   clientX: number,
   clientY: number,
-  stackOnGround: boolean,
+  onStack: boolean,
   groundY: number,
   elementWidth: number,
   elementHeight: number
@@ -32,12 +32,12 @@ export const calculateExplosiveCloneStyle = (
   const rotation = getRandomValue(-720, 720)
   const horizontalDistance = getRandomValue(-300, 300)
   const finalX = clientX + horizontalDistance
-  const finalY = stackOnGround ? groundY - 20 : clientY + 500
+  const finalY = onStack ? groundY - 20 : clientY + 500
 
   return {
     style: {
       transform: `translate(${clientX - elementWidth / 2}px, ${clientY - elementHeight / 2}px)`,
-      animation: stackOnGround
+      animation: onStack
         ? `explosive-stack ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`
         : `explosive-fall ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`,
       "--start-x": `${clientX - elementWidth / 2}px`,
@@ -47,7 +47,7 @@ export const calculateExplosiveCloneStyle = (
       "--peak-y": `${clientY - getRandomValue(200, 400)}px`,
       "--scale": scale,
       "--rotation": `${rotation}deg`,
-      "--final-opacity": stackOnGround ? "1" : "0",
+      "--final-opacity": onStack ? "1" : "0",
     } as React.CSSProperties,
     finalPosition: { x: finalX, y: finalY },
   }
@@ -57,7 +57,7 @@ export const calculateExplosiveCloneStyle = (
 export const calculateSpreadCloneStyle = (
   clientX: number,
   clientY: number,
-  stackOnGround: boolean,
+  onStack: boolean,
   groundY: number,
   elementWidth: number,
   elementHeight: number
@@ -79,7 +79,7 @@ export const calculateSpreadCloneStyle = (
       "--final-x": `${finalX}px`,
       "--final-y": `${finalY}px`,
       "--scale": scale,
-      "--final-opacity": stackOnGround ? "1" : "0",
+      "--final-opacity": onStack ? "1" : "0",
     } as React.CSSProperties,
     finalPosition: { x: finalX, y: finalY },
   }

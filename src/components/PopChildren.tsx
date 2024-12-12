@@ -12,7 +12,7 @@ import "../styles/PopChildren.css"
 // 메인 컴포넌트
 const PopChildren: React.FC<PopEffectProps> = ({
   children,
-  stackOnGround = false,
+  onStack = false,
   groundY = window.innerHeight - 100,
   maxStackedItems = 50,
   spawnInterval = 50,
@@ -36,7 +36,7 @@ const PopChildren: React.FC<PopEffectProps> = ({
       const { style, finalPosition } = getAnimationStyleCalculator(animationType)(
         clientX,
         clientY,
-        stackOnGround,
+        onStack,
         groundY,
         elementWidth,
         elementHeight
@@ -50,9 +50,7 @@ const PopChildren: React.FC<PopEffectProps> = ({
 
       setClones((prev) => {
         const updatedClones = [...prev, newClone]
-        return stackOnGround
-          ? getStackedClones(updatedClones, maxStackedItems)
-          : getPersistentClones(updatedClones, duration)
+        return onStack ? getStackedClones(updatedClones, maxStackedItems) : getPersistentClones(updatedClones, duration)
       })
     },
     [groundY, maxStackedItems, elementWidth, elementHeight]

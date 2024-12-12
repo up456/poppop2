@@ -4,7 +4,7 @@ import { AnimationEnum } from "./utils"
 // 컴포넌트 Props 타입 정의
 export interface PopEffectProps {
   children: ReactNode
-  stackOnGround?: boolean // 바닥에 쌓이는 효과 활성화 여부
+  onStack?: boolean // 바닥에 쌓이는 효과 활성화 여부
   groundY?: number // 바닥 위치 (px)
   maxStackedItems?: number // 최대 쌓이는 아이템 수
   spawnInterval?: number // 생성 간격 (ms)
