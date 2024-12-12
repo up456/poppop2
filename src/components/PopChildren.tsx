@@ -76,14 +76,6 @@ const PopChildren: React.FC<PopEffectProps> = ({
   }, [])
 
   // 마우스 이벤트 핸들러들
-  const handleClick = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault()
-      createClone(e.clientX, e.clientY)
-    },
-    [createClone]
-  )
-
   const handleMouseDown = useCallback(
     (e: React.MouseEvent | React.TouchEvent) => {
       e.preventDefault()
@@ -133,7 +125,6 @@ const PopChildren: React.FC<PopEffectProps> = ({
   return (
     <div ref={containerRef} className="pop-container">
       <div
-        onClick={handleClick}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
