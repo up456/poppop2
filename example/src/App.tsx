@@ -1,6 +1,6 @@
 import React from "react"
 import { PopChildren } from "../../src"
-import { AnimationEnum } from "../../src/utils"
+import { AnimationEnum } from "../../src/animations"
 import "./App.css"
 
 function App() {

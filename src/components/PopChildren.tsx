@@ -1,13 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect } from "react"
 import { PopEffectProps, CloneItem } from "../types"
-import {
-  getPositionFromEvent,
-  getStackedClones,
-  getPersistentClones,
-  getAnimationStyleCalculator,
-  AnimationEnum,
-} from "../utils"
+import { getPositionFromEvent, getStackedClones, getPersistentClones } from "../utils"
 import "../styles/PopChildren.css"
+import { AnimationEnum, getAnimationStyleCalculator } from "../animations"
 
 // 메인 컴포넌트
 const PopChildren: React.FC<PopEffectProps> = ({
