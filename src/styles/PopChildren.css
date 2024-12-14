@@ -2,7 +2,6 @@
 
 /* 컨테이너 스타일 */
 .pop-container {
-  position: relative;
   display: inline-block;
 }
 
@@ -13,7 +12,7 @@
 
 /* 복제된 요소의 기본 스타일 */
 .pop-clone {
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 0;
   pointer-events: none; /* 마우스 이벤트 무시 */
