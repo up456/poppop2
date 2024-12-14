@@ -6,10 +6,20 @@
 .container {
   display: flex;
   justify-content: space-evenly;
+  gap: 1rem;
 }
 
 .example-box {
   width: 30vw;
+}
+.example-box:nth-child(1) {
+  background-color: #ff4b8a32;
+}
+.example-box:nth-child(2) {
+  background-color: #24c8db32;
+}
+.example-box:nth-child(3) {
+  background-color: #ffd93d32;
 }
 
 .pop-button {

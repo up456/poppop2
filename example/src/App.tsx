@@ -18,14 +18,20 @@ function App() {
 
         <div className="example-box">
           <h3>바닥에 쌓이는 효과</h3>
-          <PopChildren isStackable maxStackedItems={100} spawnInterval={100} range={400}>
+          <PopChildren isStackable maxStackedItems={100} spawnInterval={100} range={400} groundY={3000}>
             <div className="box">여기도 클릭해보세요!</div>
           </PopChildren>
         </div>
 
         <div className="example-box">
           <h3 className="margin-bottom-3">확산 효과</h3>
-          <PopChildren spawnInterval={30} maxStackedItems={50} animationType={AnimationEnum.SPREAD} isStackable>
+          <PopChildren
+            spawnInterval={30}
+            maxStackedItems={50}
+            animationType={AnimationEnum.SPREAD}
+            isStackable
+            range={500}
+          >
             <div className="heart">
               <span className="heart-text">확산!</span>
             </div>
