@@ -1,5 +1,5 @@
-import { CloneItem } from "./components/PopChildren"
 import { getRandomValue } from "./utils"
+import type { CloneItemType } from "./hooks/useCloneCreator"
 
 // 애니메이션 타입을 관리하는 enum 추가
 export enum AnimationEnum {
@@ -8,7 +8,7 @@ export enum AnimationEnum {
 }
 
 // 공통 설정을 위한 인터페이스 정의
-interface AnimationConfig {
+type AnimationConfig = {
   clientX: number
   clientY: number
   onStack: boolean
@@ -20,7 +20,7 @@ interface AnimationConfig {
 
 // 애니메이션 타입에 따라 적절한 스타일 계산 함수를 반환하는 팩토리 함수
 export const getAnimationStyleCalculator = (type: AnimationEnum) => {
-  return (config: AnimationConfig): Pick<CloneItem, "style" | "finalPosition"> => {
+  return (config: AnimationConfig): Pick<CloneItemType, "style" | "finalPosition"> => {
     switch (type) {
       case AnimationEnum.EXPLOSIVE:
         return calculateExplosiveCloneStyle(config)
@@ -41,7 +41,7 @@ export const calculateExplosiveCloneStyle = ({
   elementHeight,
   groundY = 0, // 기본값 설정
   range = 300,
-}: AnimationConfig): Pick<CloneItem, "style" | "finalPosition"> => {
+}: AnimationConfig): Pick<CloneItemType, "style" | "finalPosition"> => {
   const scale = getRandomValue(0.3, 1)
   const duration = getRandomValue(1, 1.5)
   const rotation = getRandomValue(-720, 720)
@@ -76,7 +76,7 @@ export const calculateSpreadCloneStyle = ({
   elementWidth,
   elementHeight,
   range = 300, // 기본값 설정
-}: AnimationConfig): Pick<CloneItem, "style" | "finalPosition"> => {
+}: AnimationConfig): Pick<CloneItemType, "style" | "finalPosition"> => {
   const scale = getRandomValue(0.4, 0.8)
   const duration = getRandomValue(0.8, 1.2)
   const angle = getRandomValue(0, Math.PI * 2)

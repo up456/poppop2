@@ -15,13 +15,6 @@ type Props = {
   range?: number // 확산 범위 (px)
 }
 
-// 복제된 요소의 상태 타입 정의
-export type CloneItem = {
-  createdAt: number
-  style: React.CSSProperties
-  finalPosition?: { x: number; y: number } // 최종 위치
-}
-
 // 메인 컴포넌트
 const PopChildren: React.FC<Props> = ({
   children,

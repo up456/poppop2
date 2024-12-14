@@ -2,9 +2,15 @@ import { useCallback, useRef, useState, useEffect } from "react"
 import { getAnimationStyleCalculator } from "../animations"
 import { getStackedClones, getPersistentClones } from "../utils"
 import { AnimationEnum } from "../animations"
-import { CloneItem } from "../components/PopChildren"
 
-interface UseCloneCreatorProps {
+// 복제된 요소의 상태 타입 정의
+export type CloneItemType = {
+  createdAt: number
+  style: React.CSSProperties
+  finalPosition?: { x: number; y: number } // 최종 위치
+}
+
+type UseCloneCreatorProps = {
   onStack: boolean
   maxStackedItems: number
   spawnInterval: number
@@ -27,7 +33,7 @@ export const useCloneCreator = ({
   elementHeight,
   duration,
 }: UseCloneCreatorProps) => {
-  const [clones, setClones] = useState<CloneItem[]>([])
+  const [clones, setClones] = useState<CloneItemType[]>([])
   const isPressingRef = useRef(false)
   const spawnTimerRef = useRef<NodeJS.Timeout>()
   const mousePositionRef = useRef({ x: 0, y: 0 })
@@ -44,7 +50,7 @@ export const useCloneCreator = ({
         range,
       })
 
-      const newClone: CloneItem = {
+      const newClone: CloneItemType = {
         createdAt: Date.now() + Math.random(),
         style,
         finalPosition,

@@ -1,4 +1,4 @@
-import { CloneItem } from "./components/PopChildren"
+import type { CloneItemType } from "./hooks/useCloneCreator"
 
 // 이벤트 타입 별칭 정의
 export type MouseOrTouchEvent = React.MouseEvent | React.TouchEvent
@@ -25,12 +25,12 @@ export const getPositionFromEvent = (e: MouseOrTouchEvent | GlobalMouseOrTouchEv
 }
 
 // 쌓인 요소들을 반환하는 함수
-export const getStackedClones = (clones: CloneItem[], maxItems: number): CloneItem[] => {
+export const getStackedClones = (clones: CloneItemType[], maxItems: number): CloneItemType[] => {
   return clones.slice(-maxItems)
 }
 
 // 사라지지 않고 보여지는 요소들을 반환하는 함수
-export const getPersistentClones = (clones: CloneItem[], duration: number): CloneItem[] => {
+export const getPersistentClones = (clones: CloneItemType[], duration: number): CloneItemType[] => {
   return clones.filter((clone) => Date.now() - clone.createdAt < duration * 1000)
 }
 
