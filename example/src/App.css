@@ -1,26 +1,18 @@
 .app {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-.card {
-  padding: 2em;
+.container {
   display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  align-items: center;
+  justify-content: space-evenly;
 }
 
-.example-row {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
+.example-box {
+  width: 30vw;
 }
 
 .pop-button {
+  width: max-content;
   padding: 1em 2em;
   font-size: 1.2em;
   border-radius: 8px;
@@ -36,7 +28,8 @@
 }
 
 .box {
-  width: 150px;
+  width: max-content;
+  padding: 0 1rem;
   height: 80px;
   background: linear-gradient(45deg, #646cff, #24c8db);
   border-radius: 12px;
@@ -60,4 +53,44 @@
   font-weight: bold;
   cursor: pointer;
   font-size: 0.9em;
+}
+
+.heart {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(45deg, #ff6b6b, #ff4b8b);
+  position: relative;
+  transform: rotate(-45deg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  width: 80px;
+  height: 80px;
+  background: inherit;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart:before {
+  top: -40px;
+  left: 0;
+}
+
+.heart:after {
+  top: 0;
+  right: -40px;
+}
+
+.heart-text {
+  position: absolute;
+  transform: rotate(45deg);
+  padding-bottom: 30px;
+  font-weight: bold;
+  z-index: 100;
 }

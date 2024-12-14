@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React from "react"
 import { PopChildren } from "../../src"
+import { AnimationEnum } from "../../src/utils"
 import "./App.css"
 
 function App() {
@@ -7,25 +8,27 @@ function App() {
     <div className="app">
       <h1>React Pop Effect 테스트</h1>
 
-      <div className="card">
-        <div className="example-row">
+      <div className="container">
+        <div className="example-box">
           <h3>기본 효과 (날아가기)</h3>
           <PopChildren>
             <button className="pop-button">클릭하거나 누르고 있어보세요!</button>
           </PopChildren>
         </div>
 
-        <div className="example-row">
+        <div className="example-box">
           <h3>바닥에 쌓이는 효과</h3>
           <PopChildren onStack maxStackedItems={30} spawnInterval={100}>
             <div className="box">여기도 클릭해보세요!</div>
           </PopChildren>
         </div>
 
-        <div className="example-row">
-          <h3>빠른 생성 효과</h3>
-          <PopChildren spawnInterval={30}>
-            <div className="circle">빠르게!</div>
+        <div className="example-box">
+          <h3 className="margin-bottom-3">확산 효과</h3>
+          <PopChildren spawnInterval={30} maxStackedItems={50} animationType={AnimationEnum.SPREAD}>
+            <div className="heart">
+              <span className="heart-text">확산!</span>
+            </div>
           </PopChildren>
         </div>
       </div>
