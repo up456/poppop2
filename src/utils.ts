@@ -1,4 +1,14 @@
-import { CloneItem, MouseOrTouchEvent, GlobalMouseOrTouchEvent, Position } from "./types"
+import { CloneItem } from "./components/PopChildren"
+
+// 이벤트 타입 별칭 정의
+export type MouseOrTouchEvent = React.MouseEvent | React.TouchEvent
+export type GlobalMouseOrTouchEvent = globalThis.MouseEvent | globalThis.TouchEvent
+
+// 위치 정보 타입 정의
+export type Position = {
+  x: number
+  y: number
+}
 
 // 이벤트에서 위치 정보 추출 함수
 export const getPositionFromEvent = (e: MouseOrTouchEvent | GlobalMouseOrTouchEvent): Position => {

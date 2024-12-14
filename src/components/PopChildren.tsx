@@ -1,11 +1,28 @@
-import React, { useState, useCallback, useRef, useEffect } from "react"
-import { PopEffectProps, CloneItem } from "../types"
+import React, { useState, useCallback, useRef, useEffect, ReactNode } from "react"
 import { getPositionFromEvent, getStackedClones, getPersistentClones } from "../utils"
 import "../styles/PopChildren.css"
 import { AnimationEnum, getAnimationStyleCalculator } from "../animations"
 
+// 컴포넌트 Props 타입 정의
+type Props = {
+  children: ReactNode
+  onStack?: boolean // 바닥에 쌓이는 효과 활성화 여부
+  maxStackedItems?: number // 최대 쌓이는 아이템 수
+  spawnInterval?: number // 생성 간격 (ms)
+  animationType?: AnimationEnum // 애니메이션 타입
+  groundY?: number // 바닥 위치 (px)
+  range?: number // 확산 범위 (px)
+}
+
+// 복제된 요소의 상태 타입 정의
+export type CloneItem = {
+  createdAt: number
+  style: React.CSSProperties
+  finalPosition?: { x: number; y: number } // 최종 위치
+}
+
 // 메인 컴포넌트
-const PopChildren: React.FC<PopEffectProps> = ({
+const PopChildren: React.FC<Props> = ({
   children,
   onStack = false,
   maxStackedItems = 50,

@@ -1,4 +1,4 @@
-import { CloneItem } from "./types"
+import { CloneItem } from "./components/PopChildren"
 import { getRandomValue } from "./utils"
 
 // 애니메이션 타입을 관리하는 enum 추가
