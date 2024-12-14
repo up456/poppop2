@@ -5,10 +5,11 @@ import { AnimationEnum } from "./utils"
 export interface PopEffectProps {
   children: ReactNode
   onStack?: boolean // 바닥에 쌓이는 효과 활성화 여부
-  groundY?: number // 바닥 위치 (px)
   maxStackedItems?: number // 최대 쌓이는 아이템 수
   spawnInterval?: number // 생성 간격 (ms)
   animationType?: AnimationEnum // 애니메이션 타입
+  groundY?: number // 바닥 위치 (px)
+  range?: number // 확산 범위 (px)
 }
 
 // 복제된 요소의 상태 타입 정의

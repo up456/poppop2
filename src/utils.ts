@@ -6,27 +6,40 @@ export enum AnimationEnum {
   SPREAD = "spread",
 }
 
+// 공통 설정을 위한 인터페이스 정의
+interface AnimationConfig {
+  clientX: number
+  clientY: number
+  onStack: boolean
+  elementWidth: number
+  elementHeight: number
+  groundY?: number // explosive에서 사용
+  range?: number // spread에서 사용
+}
+
 // 애니메이션 타입에 따라 적절한 스타일 계산 함수를 반환하는 팩토리 함수
 export const getAnimationStyleCalculator = (type: AnimationEnum) => {
-  switch (type) {
-    case AnimationEnum.EXPLOSIVE:
-      return calculateExplosiveCloneStyle
-    case AnimationEnum.SPREAD:
-      return calculateSpreadCloneStyle
-    default:
-      return calculateExplosiveCloneStyle
+  return (config: AnimationConfig): Pick<CloneItem, "style" | "finalPosition"> => {
+    switch (type) {
+      case AnimationEnum.EXPLOSIVE:
+        return calculateExplosiveCloneStyle(config)
+      case AnimationEnum.SPREAD:
+        return calculateSpreadCloneStyle(config)
+      default:
+        return calculateExplosiveCloneStyle(config)
+    }
   }
 }
 
 // 복제된 요소의 스타일 계산 함수
-export const calculateExplosiveCloneStyle = (
-  clientX: number,
-  clientY: number,
-  onStack: boolean,
-  groundY: number,
-  elementWidth: number,
-  elementHeight: number
-): Pick<CloneItem, "style" | "finalPosition"> => {
+export const calculateExplosiveCloneStyle = ({
+  clientX,
+  clientY,
+  onStack,
+  elementWidth,
+  elementHeight,
+  groundY = 0, // 기본값 설정
+}: AnimationConfig): Pick<CloneItem, "style" | "finalPosition"> => {
   const scale = getRandomValue(0.3, 1)
   const duration = getRandomValue(1, 1.5)
   const rotation = getRandomValue(-720, 720)
@@ -54,18 +67,18 @@ export const calculateExplosiveCloneStyle = (
 }
 
 // 퍼지는 애니메이션
-export const calculateSpreadCloneStyle = (
-  clientX: number,
-  clientY: number,
-  onStack: boolean,
-  groundY: number,
-  elementWidth: number,
-  elementHeight: number
-): Pick<CloneItem, "style" | "finalPosition"> => {
+export const calculateSpreadCloneStyle = ({
+  clientX,
+  clientY,
+  onStack,
+  elementWidth,
+  elementHeight,
+  range = 300, // 기본값 설정
+}: AnimationConfig): Pick<CloneItem, "style" | "finalPosition"> => {
   const scale = getRandomValue(0.4, 0.8)
   const duration = getRandomValue(0.8, 1.2)
   const angle = getRandomValue(0, Math.PI * 2)
-  const distance = getRandomValue(100, 300)
+  const distance = getRandomValue(100, range)
 
   const finalX = clientX + Math.cos(angle) * distance
   const finalY = clientY + Math.sin(angle) * distance

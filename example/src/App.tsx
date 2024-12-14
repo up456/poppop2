@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { PopChildren } from "../../src";
-import "./App.css";
+import React, { useState } from "react"
+import { PopChildren } from "../../src"
+import "./App.css"
 
 function App() {
   return (
@@ -11,15 +11,13 @@ function App() {
         <div className="example-row">
           <h3>기본 효과 (날아가기)</h3>
           <PopChildren>
-            <button className="pop-button">
-              클릭하거나 누르고 있어보세요!
-            </button>
+            <button className="pop-button">클릭하거나 누르고 있어보세요!</button>
           </PopChildren>
         </div>
 
         <div className="example-row">
           <h3>바닥에 쌓이는 효과</h3>
-          <PopChildren stackOnGround maxStackedItems={30} spawnInterval={100}>
+          <PopChildren onStack maxStackedItems={30} spawnInterval={100}>
             <div className="box">여기도 클릭해보세요!</div>
           </PopChildren>
         </div>
@@ -32,7 +30,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -13,10 +13,11 @@ import "../styles/PopChildren.css"
 const PopChildren: React.FC<PopEffectProps> = ({
   children,
   onStack = false,
-  groundY = window.innerHeight - 100,
   maxStackedItems = 50,
   spawnInterval = 50,
   animationType = AnimationEnum.EXPLOSIVE,
+  groundY = window.innerHeight - 100,
+  range = 300,
 }) => {
   // 상태 및 ref 관리
   const [clones, setClones] = useState<CloneItem[]>([])
@@ -33,14 +34,15 @@ const PopChildren: React.FC<PopEffectProps> = ({
     (clientX: number, clientY: number) => {
       if (!containerRef.current) return
 
-      const { style, finalPosition } = getAnimationStyleCalculator(animationType)(
+      const { style, finalPosition } = getAnimationStyleCalculator(animationType)({
         clientX,
         clientY,
         onStack,
-        groundY,
         elementWidth,
-        elementHeight
-      )
+        elementHeight,
+        groundY,
+        range,
+      })
 
       const newClone: CloneItem = {
         createdAt: Date.now() + Math.random(),
