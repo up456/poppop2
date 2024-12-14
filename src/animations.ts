@@ -32,7 +32,7 @@ export const getAnimationStyleCalculator = (type: AnimationEnum) => {
   }
 }
 
-// 복제된 요소의 스타일 계산 함수
+// 폭발 애니메이션 (기본)
 export const calculateExplosiveCloneStyle = ({
   clientX,
   clientY,
@@ -40,11 +40,12 @@ export const calculateExplosiveCloneStyle = ({
   elementWidth,
   elementHeight,
   groundY = 0, // 기본값 설정
+  range = 300,
 }: AnimationConfig): Pick<CloneItem, "style" | "finalPosition"> => {
   const scale = getRandomValue(0.3, 1)
   const duration = getRandomValue(1, 1.5)
   const rotation = getRandomValue(-720, 720)
-  const horizontalDistance = getRandomValue(-300, 300)
+  const horizontalDistance = getRandomValue(-range, range)
   const finalX = clientX + horizontalDistance
   const finalY = onStack ? groundY - 20 : clientY + 500
 
