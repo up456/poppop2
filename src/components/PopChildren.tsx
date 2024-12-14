@@ -20,7 +20,7 @@ const PopChildren: React.FC<Props> = ({
   children,
   isStackable = false,
   maxStackedItems = 50,
-  spawnInterval = 50,
+  spawnInterval = 150,
   animationType = AnimationEnum.EXPLOSIVE,
   groundY = window.innerHeight - 100,
   range = 300,
