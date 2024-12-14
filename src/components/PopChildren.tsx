@@ -7,7 +7,7 @@ import { useCloneCreator } from "../hooks/useCloneCreator"
 // 컴포넌트 Props 타입 정의
 type Props = {
   children: ReactNode
-  onStack?: boolean // 바닥에 쌓이는 효과 활성화 여부
+  isStackable?: boolean // 바닥에 쌓이는 효과 활성화 여부
   maxStackedItems?: number // 최대 쌓이는 아이템 수
   spawnInterval?: number // 생성 간격 (ms)
   animationType?: AnimationEnum // 애니메이션 타입
@@ -18,7 +18,7 @@ type Props = {
 // 메인 컴포넌트
 const PopChildren: React.FC<Props> = ({
   children,
-  onStack = false,
+  isStackable = false,
   maxStackedItems = 50,
   spawnInterval = 50,
   animationType = AnimationEnum.EXPLOSIVE,
@@ -38,7 +38,7 @@ const PopChildren: React.FC<Props> = ({
     spawnInterval,
     duration,
     range,
-    onStack,
+    isStackable,
     maxStackedItems,
     groundY,
   })

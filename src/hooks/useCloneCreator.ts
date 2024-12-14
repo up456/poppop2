@@ -11,7 +11,7 @@ export type CloneItemType = {
 }
 
 type UseCloneCreatorProps = {
-  onStack: boolean
+  isStackable: boolean
   maxStackedItems: number
   spawnInterval: number
   animationType: AnimationEnum
@@ -23,7 +23,7 @@ type UseCloneCreatorProps = {
 }
 
 export const useCloneCreator = ({
-  onStack,
+  isStackable,
   maxStackedItems,
   spawnInterval,
   animationType,
@@ -43,7 +43,7 @@ export const useCloneCreator = ({
       const { style, finalPosition } = getAnimationStyleCalculator(animationType)({
         clientX,
         clientY,
-        onStack,
+        isStackable,
         elementWidth,
         elementHeight,
         groundY,
@@ -58,10 +58,12 @@ export const useCloneCreator = ({
 
       setClones((prev) => {
         const updatedClones = [...prev, newClone]
-        return onStack ? getStackedClones(updatedClones, maxStackedItems) : getPersistentClones(updatedClones, duration)
+        return isStackable
+          ? getStackedClones(updatedClones, maxStackedItems)
+          : getPersistentClones(updatedClones, duration)
       })
     },
-    [groundY, maxStackedItems, elementWidth, elementHeight, onStack, animationType, range, duration]
+    [groundY, maxStackedItems, elementWidth, elementHeight, isStackable, animationType, range, duration]
   )
 
   const startCreatingClones = useCallback(() => {

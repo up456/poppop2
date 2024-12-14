@@ -11,7 +11,7 @@ export enum AnimationEnum {
 type AnimationConfig = {
   clientX: number
   clientY: number
-  onStack: boolean
+  isStackable: boolean
   elementWidth: number
   elementHeight: number
   groundY?: number // explosive에서 사용
@@ -36,7 +36,7 @@ export const getAnimationStyleCalculator = (type: AnimationEnum) => {
 export const calculateExplosiveCloneStyle = ({
   clientX,
   clientY,
-  onStack,
+  isStackable,
   elementWidth,
   elementHeight,
   groundY = 0, // 기본값 설정
@@ -47,12 +47,12 @@ export const calculateExplosiveCloneStyle = ({
   const rotation = getRandomValue(-720, 720)
   const horizontalDistance = getRandomValue(-range, range)
   const finalX = clientX + horizontalDistance
-  const finalY = onStack ? groundY - 20 : clientY + 500
+  const finalY = isStackable ? groundY - 20 : clientY + 500
 
   return {
     style: {
       transform: `translate(${clientX - elementWidth / 2}px, ${clientY - elementHeight / 2}px)`,
-      animation: onStack
+      animation: isStackable
         ? `explosive-stack ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`
         : `explosive-fall ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`,
       "--start-x": `${clientX - elementWidth / 2}px`,
@@ -62,7 +62,7 @@ export const calculateExplosiveCloneStyle = ({
       "--peak-y": `${clientY - getRandomValue(200, 400)}px`,
       "--scale": scale,
       "--rotation": `${rotation}deg`,
-      "--final-opacity": onStack ? "1" : "0",
+      "--final-opacity": isStackable ? "1" : "0",
     } as React.CSSProperties,
     finalPosition: { x: finalX, y: finalY },
   }
@@ -72,7 +72,7 @@ export const calculateExplosiveCloneStyle = ({
 export const calculateSpreadCloneStyle = ({
   clientX,
   clientY,
-  onStack,
+  isStackable,
   elementWidth,
   elementHeight,
   range = 300, // 기본값 설정
@@ -94,7 +94,7 @@ export const calculateSpreadCloneStyle = ({
       "--final-x": `${finalX}px`,
       "--final-y": `${finalY}px`,
       "--scale": scale,
-      "--final-opacity": onStack ? "1" : "0",
+      "--final-opacity": isStackable ? "1" : "0",
     } as React.CSSProperties,
     finalPosition: { x: finalX, y: finalY },
   }
