@@ -35,7 +35,7 @@ export const useCloneCreator = ({
 }: UseCloneCreatorProps) => {
   const [clones, setClones] = useState<CloneItemType[]>([])
   const isPressingRef = useRef(false)
-  const spawnTimerRef = useRef<NodeJS.Timeout>()
+  const spawnTimerRef = useRef<NodeJS.Timeout | undefined>(undefined)
   const mousePositionRef = useRef({ x: 0, y: 0 })
 
   const createClone = useCallback(
