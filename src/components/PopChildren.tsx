@@ -22,7 +22,7 @@ const PopChildren: React.FC<Props> = ({
   maxStackedItems = 50,
   spawnInterval = 150,
   animationType = AnimationEnum.EXPLOSIVE,
-  groundY = window.innerHeight - 100,
+  groundY = typeof window !== "undefined" ? window.innerHeight - 100 : 0,
   range = 300,
 }) => {
   // 상태 및 ref 관리
