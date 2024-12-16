@@ -1,9 +1,10 @@
-import React from "react"
-import { PopChildren } from "../../src"
-import { AnimationEnum } from "../../src/animations"
-import "./App.css"
+"use client"
 
-function App() {
+import { AnimationEnum } from "../../../src/animations"
+import PopChildren from "../../../src/components/PopChildren"
+import "./page.css"
+
+export default function Home() {
   return (
     <div className="app">
       <h1>React Pop Effect 테스트</h1>
@@ -41,5 +42,3 @@ function App() {
     </div>
   )
 }
-
-export default App
