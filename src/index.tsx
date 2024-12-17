@@ -1,1 +1,2 @@
-export { default as PopChildren } from "./components/PopChildren";
+export { PopChildren } from "./components/PopChildren"
+export { AnimationEnum } from "./animations"

@@ -1,7 +1,6 @@
 "use client"
 
-import { AnimationEnum } from "../../../src/animations"
-import PopChildren from "../../../src/components/PopChildren"
+import { PopChildren, AnimationEnum } from "poppop2"
 import "./page.css"
 
 export default function Home() {
