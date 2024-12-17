@@ -16,7 +16,7 @@ type Props = {
 }
 
 // 메인 컴포넌트
-const PopChildren: React.FC<Props> = ({
+export const PopChildren: React.FC<Props> = ({
   children,
   isStackable = false,
   maxStackedItems = 50,
@@ -108,5 +108,3 @@ const PopChildren: React.FC<Props> = ({
     </div>
   )
 }
-
-export default PopChildren
