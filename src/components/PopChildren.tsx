@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useCallback, useRef, useEffect, ReactNode } from "react"
 import { getPositionFromEvent } from "../utils"
 import "../styles/PopChildren.css"
