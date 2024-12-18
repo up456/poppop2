@@ -21,17 +21,14 @@ import { PopChildren } from "poppop2"
 ```
 ## props
 
-| 속성 | 타입 | 설명 |
-|------|------|------|
-| isStackable | boolean | 요소들이 쌓일 수 있는지 여부를 결정합니다 |
-| maxStackedItems | number | 최대로 쌓일 수 있는 요소의 개수를 지정합니다 |
-| spawnInterval | number | 요소가 생성되는 간격을 밀리초 단위로 지정합니다 |
-| animationType | AnimationType | 애니메이션 타입을 지정합니다 |
-| groundY | number | 요소가 착지하는 Y축 위치를 지정합니다 |
-| range | number | 요소가 튀어나가는 범위를 지정합니다 |
-| elementWidth | number | 요소의 너비를 픽셀 단위로 지정합니다 |
-| elementHeight | number | 요소의 높이를 픽셀 단위로 지정합니다 |
-| duration | number | 애니메이션 지속 시간을 밀리초 단위로 지정합니다 |
+| 속성 | 타입 | 기본값 | 설명 | 비고 |
+|------|------|------|------|------|
+| isStackable | boolean | false | 요소들이 사라지지 않고 쌓일 수 있는지 여부를 결정합니다 |
+| maxStackedItems | number | 50 | isStackable이 true일 때, 최대로 쌓일 수 있는 요소의 개수를 지정합니다 |
+| spawnInterval | number | 150 | 요소가 생성되는 간격을 밀리초 단위로 지정합니다 |
+| animationType | AnimationType | "explosive" | 애니메이션 타입을 지정합니다  | 종류: "explosive", "spread"|
+| groundY | number | 페이지 높이 - 100 |  요소가 착지하는 Y축 위치를 지정합니다 | "explosive" type에서만 동작|
+| range | number | 100 | 요소의 퍼짐 정도를 지정합니다 |
 
 
 ## 비지원 범위
