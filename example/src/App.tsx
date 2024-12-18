@@ -1,7 +1,7 @@
 "use client"
 
 import { PopChildren, AnimationEnum } from "poppop2"
-import "./page.css"
+import "./App.css"
 
 export default function Home() {
   return (
