@@ -35,7 +35,7 @@ export const useCloneCreator = ({
 }: UseCloneCreatorProps) => {
   const [clones, setClones] = useState<CloneItemType[]>([])
   const isPressingRef = useRef(false)
-  const spawnTimerRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const spawnTimerRef = useRef<number | undefined>(undefined)
   const mousePositionRef = useRef({ x: 0, y: 0 })
 
   const createClone = useCallback(
@@ -69,19 +69,26 @@ export const useCloneCreator = ({
   const startCreatingClones = useCallback(() => {
     if (spawnTimerRef.current) return
     isPressingRef.current = true
-    createClone(mousePositionRef.current.x, mousePositionRef.current.y)
 
-    spawnTimerRef.current = setInterval(() => {
-      if (isPressingRef.current) {
+    let lastSpawnTime = 0
+    const animate = (currentTime: number) => {
+      if (!isPressingRef.current) return
+
+      // 현재 시간 - 마지막 생성 시간이 spawnInterval보다 크면 === 생성주기가 되었다는 뜻
+      if (currentTime - lastSpawnTime >= spawnInterval) {
         createClone(mousePositionRef.current.x, mousePositionRef.current.y)
+        lastSpawnTime = currentTime
       }
-    }, spawnInterval)
+      spawnTimerRef.current = requestAnimationFrame(animate)
+    }
+
+    spawnTimerRef.current = requestAnimationFrame(animate)
   }, [createClone, spawnInterval])
 
   const stopCreatingClones = useCallback(() => {
     isPressingRef.current = false
     if (spawnTimerRef.current) {
-      clearInterval(spawnTimerRef.current)
+      cancelAnimationFrame(spawnTimerRef.current)
       spawnTimerRef.current = undefined
     }
   }, [])
@@ -89,7 +96,7 @@ export const useCloneCreator = ({
   useEffect(() => {
     return () => {
       if (spawnTimerRef.current) {
-        clearInterval(spawnTimerRef.current)
+        cancelAnimationFrame(spawnTimerRef.current)
         spawnTimerRef.current = undefined
       }
     }
