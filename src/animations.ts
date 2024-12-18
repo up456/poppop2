@@ -1,11 +1,8 @@
 import { getRandomValue } from "./utils"
 import type { CloneItemType } from "./hooks/useCloneCreator"
 
-// 애니메이션 타입을 관리하는 enum 추가
-export enum AnimationEnum {
-  EXPLOSIVE = "explosive",
-  SPREAD = "spread",
-}
+// 애니메이션 타입
+export type AnimationType = "explosive" | "spread"
 
 // 공통 설정을 위한 인터페이스 정의
 type AnimationConfig = {
@@ -19,12 +16,12 @@ type AnimationConfig = {
 }
 
 // 애니메이션 타입에 따라 적절한 스타일 계산 함수를 반환하는 팩토리 함수
-export const getAnimationStyleCalculator = (type: AnimationEnum) => {
+export const getAnimationStyleCalculator = (type: AnimationType) => {
   return (config: AnimationConfig): Pick<CloneItemType, "style" | "finalPosition"> => {
     switch (type) {
-      case AnimationEnum.EXPLOSIVE:
+      case "explosive":
         return calculateExplosiveCloneStyle(config)
-      case AnimationEnum.SPREAD:
+      case "spread":
         return calculateSpreadCloneStyle(config)
       default:
         return calculateExplosiveCloneStyle(config)

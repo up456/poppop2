@@ -3,7 +3,7 @@
 import React, { useState, useCallback, useRef, useEffect, ReactNode } from "react"
 import { getPositionFromEvent } from "../utils"
 import "../styles/PopChildren.css"
-import { AnimationEnum } from "../animations"
+import { AnimationType } from "../animations"
 import { useCloneCreator } from "../hooks/useCloneCreator"
 
 // 컴포넌트 Props 타입 정의
@@ -12,7 +12,7 @@ type Props = {
   isStackable?: boolean // 바닥에 쌓이는 효과 활성화 여부
   maxStackedItems?: number // 최대 쌓이는 아이템 수
   spawnInterval?: number // 생성 간격 (ms)
-  animationType?: AnimationEnum // 애니메이션 타입
+  animationType?: AnimationType // 애니메이션 타입
   groundY?: number // 바닥 위치 (px)
   range?: number // 확산 범위 (px)
 }
@@ -23,7 +23,7 @@ export const PopChildren: React.FC<Props> = ({
   isStackable = false,
   maxStackedItems = 50,
   spawnInterval = 150,
-  animationType = AnimationEnum.EXPLOSIVE,
+  animationType = "explosive",
   groundY = typeof window !== "undefined" ? window.innerHeight - 100 : 0,
   range = 300,
 }) => {

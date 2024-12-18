@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState, useEffect } from "react"
 import { getAnimationStyleCalculator } from "../animations"
 import { getStackedClones, getPersistentClones } from "../utils"
-import { AnimationEnum } from "../animations"
+import { AnimationType } from "../animations"
 
 // 복제된 요소의 상태 타입 정의
 export type CloneItemType = {
@@ -10,11 +10,11 @@ export type CloneItemType = {
   finalPosition?: { x: number; y: number } // 최종 위치
 }
 
-type UseCloneCreatorProps = {
+export type UseCloneCreatorProps = {
   isStackable: boolean
   maxStackedItems: number
   spawnInterval: number
-  animationType: AnimationEnum
+  animationType: AnimationType
   groundY: number
   range: number
   elementWidth: number

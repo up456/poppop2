@@ -1,14 +1,14 @@
 import { renderHook, act } from "@testing-library/react"
 import { describe, it, expect, beforeEach, vi } from "vitest"
 import { useCloneCreator } from "../useCloneCreator"
-import { AnimationEnum } from "../../animations"
+import { UseCloneCreatorProps } from "../useCloneCreator"
 
 describe("useCloneCreator", () => {
-  const defaultProps = {
+  const defaultProps: UseCloneCreatorProps = {
     isStackable: true,
     maxStackedItems: 5,
     spawnInterval: 100,
-    animationType: AnimationEnum.EXPLOSIVE,
+    animationType: "explosive",
     groundY: 500,
     range: 100,
     elementWidth: 50,
