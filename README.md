@@ -4,6 +4,10 @@
 
 
 
+https://github.com/user-attachments/assets/41195858-7512-4724-bc7c-daba046178b2
+
+
+
 ## 설치 방법
 
 ```shell
