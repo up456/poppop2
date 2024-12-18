@@ -40,9 +40,12 @@ export const useCloneCreator = ({
 
   const createClone = useCallback(
     (clientX: number, clientY: number) => {
+      const cursorX = clientX + window.scrollX
+      const cursorY = clientY + window.scrollY
+
       const { style, finalPosition } = getAnimationStyleCalculator(animationType)({
-        clientX,
-        clientY,
+        cursorX,
+        cursorY,
         isStackable,
         elementWidth,
         elementHeight,

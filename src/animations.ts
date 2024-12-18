@@ -9,8 +9,8 @@ export enum AnimationEnum {
 
 // 공통 설정을 위한 인터페이스 정의
 type AnimationConfig = {
-  clientX: number
-  clientY: number
+  cursorX: number
+  cursorY: number
   isStackable: boolean
   elementWidth: number
   elementHeight: number
@@ -34,8 +34,8 @@ export const getAnimationStyleCalculator = (type: AnimationEnum) => {
 
 // 폭발 애니메이션 (기본)
 export const calculateExplosiveCloneStyle = ({
-  clientX,
-  clientY,
+  cursorX,
+  cursorY,
   isStackable,
   elementWidth,
   elementHeight,
@@ -46,19 +46,19 @@ export const calculateExplosiveCloneStyle = ({
   const duration = getRandomValue(1, 1.5)
   const rotation = getRandomValue(-720, 720)
   const horizontalDistance = getRandomValue(-range, range)
-  const finalX = clientX + horizontalDistance
-  const finalY = isStackable ? groundY - 20 : clientY + 500
+  const finalX = cursorX + horizontalDistance
+  const finalY = isStackable ? groundY - 20 : cursorY + 500
 
   return {
     style: {
       animation: isStackable
         ? `explosive-stack ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`
         : `explosive-fall ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`,
-      "--start-x": `${clientX - elementWidth / 2}px`,
-      "--start-y": `${clientY - elementHeight / 2}px`,
+      "--start-x": `${cursorX - elementWidth / 2}px`,
+      "--start-y": `${cursorY - elementHeight / 2}px`,
       "--final-x": `${finalX}px`,
       "--final-y": `${finalY}px`,
-      "--peak-y": `${clientY - getRandomValue(200, 400)}px`,
+      "--peak-y": `${cursorY - getRandomValue(200, 400)}px`,
       "--scale": scale,
       "--rotation": `${rotation}deg`,
       "--final-opacity": isStackable ? "1" : "0",
@@ -69,8 +69,8 @@ export const calculateExplosiveCloneStyle = ({
 
 // 퍼지는 애니메이션
 export const calculateSpreadCloneStyle = ({
-  clientX,
-  clientY,
+  cursorX,
+  cursorY,
   isStackable,
   elementWidth,
   elementHeight,
@@ -81,14 +81,14 @@ export const calculateSpreadCloneStyle = ({
   const angle = getRandomValue(0, Math.PI * 2)
   const distance = getRandomValue(100, range)
 
-  const finalX = clientX + Math.cos(angle) * distance
-  const finalY = clientY + Math.sin(angle) * distance
+  const finalX = cursorX + Math.cos(angle) * distance
+  const finalY = cursorY + Math.sin(angle) * distance
 
   return {
     style: {
       animation: `spread ${duration}s cubic-bezier(0.4, 0, 0.2, 1) forwards`,
-      "--start-x": `${clientX - elementWidth / 2}px`,
-      "--start-y": `${clientY - elementHeight / 2}px`,
+      "--start-x": `${cursorX - elementWidth / 2}px`,
+      "--start-y": `${cursorY - elementHeight / 2}px`,
       "--final-x": `${finalX}px`,
       "--final-y": `${finalY}px`,
       "--scale": scale,
