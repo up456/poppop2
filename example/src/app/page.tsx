@@ -37,6 +37,33 @@ export default function Home() {
             <div className="circle">빠르다</div>
           </PopChildren>
         </div>
+        <div className="example-box">
+          <h3>svg</h3>
+          <PopChildren spawnInterval={20} maxStackedItems={50} animationType={AnimationEnum.SPREAD}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="-2 -2 28 28"
+              fill="yellow"
+              stroke="yellow"
+              className="circle"
+            >
+              <path
+                fillRule="evenodd"
+                d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </PopChildren>
+        </div>
+        <div className="example-box">
+          <h3>image</h3>
+          <PopChildren spawnInterval={20} maxStackedItems={50} animationType={AnimationEnum.SPREAD}>
+            <img
+              className="circle"
+              src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            />
+          </PopChildren>
+        </div>
       </div>
     </div>
   )
