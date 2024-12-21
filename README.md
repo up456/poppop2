@@ -20,7 +20,8 @@ npm install poppop2
 ```tsx
 import { PopChildren } from "poppop2"
 <PopChildren >
-  <button>Pop하고 싶은 요소 무엇이든 넣으세요!</button>
+  // Pop하고 싶은 요소 무엇이든 넣으세요!
+  <button>버튼</button>
 </PopChildren>
 ```
 ## props
