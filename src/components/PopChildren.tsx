@@ -23,7 +23,7 @@ const PopChildrenBase: React.FC<Props> = ({
   maxStackedItems = 50,
   spawnInterval = 150,
   animationType = "explosive",
-  groundY = typeof window !== "undefined" ? window.innerHeight - 100 : 0,
+  groundY = 0,
   range = 300,
 }) => {
   // 상태 및 ref 관리
@@ -31,6 +31,7 @@ const PopChildrenBase: React.FC<Props> = ({
   const duration = 1.5 // 요소 유지 시간
   const [elementWidth, setElementWidth] = useState(0) // 요소 너비
   const [elementHeight, setElementHeight] = useState(0) // 요소 높이
+  const [groundYState, setGroundYState] = useState(groundY || 0)
 
   const { clones, mousePositionRef, startCreatingClones, stopCreatingClones } = useCloneCreator({
     animationType,
@@ -41,7 +42,7 @@ const PopChildrenBase: React.FC<Props> = ({
     range,
     isStackable,
     maxStackedItems,
-    groundY,
+    groundY: groundYState,
   })
 
   // 마우스 이벤트 핸들러들
@@ -61,6 +62,12 @@ const PopChildrenBase: React.FC<Props> = ({
     },
     [stopCreatingClones]
   )
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && !groundY) {
+      setGroundYState(window.innerHeight - 100)
+    }
+  }, [groundY])
 
   // DOM이 마운트된 후 크기를 업데이트
   useEffect(() => {
@@ -111,11 +118,6 @@ const PopChildrenBase: React.FC<Props> = ({
 }
 
 export const PopChildren: React.FC<Props> = (props) => {
-  if (typeof window === "undefined") {
-    // 서버 사이드에서 실행될 경우
-    return <>{props.children}</>
-  }
-
   try {
     return <PopChildrenBase {...props} />
   } catch (error) {
