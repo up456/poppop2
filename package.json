@@ -1,7 +1,7 @@
 {
   "name": "poppop2",
   "version": "1.0.0",
-  "description": "React component that makes children elements pop with random animation effects",
+  "description": "React component that makes children elements pop with animation effects",
   "main": "src/index.tsx",
   "scripts": {
     "dev": "vite",
@@ -17,7 +17,7 @@
     "pop",
     "component"
   ],
-  "author": "",
+  "author": "fabbro",
   "license": "MIT",
   "dependencies": {
     "react": ">=16.8.0",
