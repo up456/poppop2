@@ -24,6 +24,17 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+      - name: Check package version and update if needed
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          LATEST_VERSION=$(npm view ${{ github.event.repository.name }} version || echo "0.0.0")
+          
+          if [ "$CURRENT_VERSION" = "$LATEST_VERSION" ]; then
+            # package.json 버전이 변경되지 않았다면 패치 버전을 증가
+            npm version patch
+          else
+            echo "Using version from package.json: $CURRENT_VERSION"
+          fi
       - run: npm ci
       - run: npm publish
         env:
