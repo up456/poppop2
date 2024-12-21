@@ -2,7 +2,13 @@
   "name": "poppop2",
   "version": "1.0.7",
   "description": "React component that makes children elements pop with animation effects",
-  "main": "src/index.tsx",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -7,10 +7,10 @@ export default defineConfig({
   plugins: [react(), dts({ include: ["src"] })],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.tsx"),
+      entry: resolve(__dirname, "src/index.ts"),
       formats: ["es", "cjs"],
-      name: "PopChildren",
-      fileName: (format) => `index.${format === "es" ? "esm" : "cjs"}.js`,
+      name: "poppop2",
+      fileName: "index",
     },
     rollupOptions: {
       external: ["react", "react-dom"],
@@ -21,6 +21,5 @@ export default defineConfig({
         },
       },
     },
-    sourcemap: true,
   },
 })

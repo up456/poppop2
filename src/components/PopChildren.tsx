@@ -1,13 +1,13 @@
 "use client"
 
-import React, { useState, useCallback, useRef, useEffect, ReactNode } from "react"
+import React, { useState, useCallback, useRef, useEffect, type ReactNode } from "react"
 import { getPositionFromEvent } from "../utils"
 import "../styles/PopChildren.css"
 import { AnimationType } from "../animations"
 import { useCloneCreator } from "../hooks/useCloneCreator"
 
 // 컴포넌트 Props 타입 정의
-type Props = {
+interface Props {
   children: ReactNode
   isStackable?: boolean // 바닥에 쌓이는 효과 활성화 여부
   maxStackedItems?: number // 최대 쌓이는 아이템 수
@@ -17,7 +17,7 @@ type Props = {
   range?: number // 확산 범위 (px)
 }
 
-const PopChildrenBase: React.FC<Props> = ({
+const PopChildrenBase = ({
   children,
   isStackable = false,
   maxStackedItems = 50,
@@ -25,7 +25,7 @@ const PopChildrenBase: React.FC<Props> = ({
   animationType = "explosive",
   groundY = 0,
   range = 300,
-}) => {
+}: Props): React.JSX.Element => {
   // 상태 및 ref 관리
   const containerRef = useRef<HTMLDivElement>(null) // 컨테이너 참조
   const duration = 1.5 // 요소 유지 시간
@@ -117,7 +117,7 @@ const PopChildrenBase: React.FC<Props> = ({
   )
 }
 
-export const PopChildren: React.FC<Props> = (props) => {
+export const PopChildren = (props: Props): React.JSX.Element => {
   try {
     return <PopChildrenBase {...props} />
   } catch (error) {
