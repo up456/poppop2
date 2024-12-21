@@ -1,6 +1,6 @@
 {
   "name": "poppop2",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "React component that makes children elements pop with animation effects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
