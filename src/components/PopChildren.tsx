@@ -17,8 +17,7 @@ type Props = {
   range?: number // 확산 범위 (px)
 }
 
-// 메인 컴포넌트
-export const PopChildren: React.FC<Props> = ({
+const PopChildrenBase: React.FC<Props> = ({
   children,
   isStackable = false,
   maxStackedItems = 50,
@@ -109,4 +108,18 @@ export const PopChildren: React.FC<Props> = ({
       ))}
     </div>
   )
+}
+
+export const PopChildren: React.FC<Props> = (props) => {
+  if (typeof window === "undefined") {
+    // 서버 사이드에서 실행될 경우
+    return <>{props.children}</>
+  }
+
+  try {
+    return <PopChildrenBase {...props} />
+  } catch (error) {
+    console.warn("PopChildren 렌더링 실패:", error)
+    return <>{props.children}</>
+  }
 }
