@@ -19,13 +19,12 @@
   ],
   "author": "fabbro",
   "license": "MIT",
-  "dependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
-  },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
