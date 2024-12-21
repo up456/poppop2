@@ -1,5 +1,3 @@
-"use client"
-
 import { PopChildren } from "poppop2"
 import "./App.css"
 
