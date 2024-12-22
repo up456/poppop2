@@ -48,9 +48,10 @@ export const calculateExplosiveCloneStyle = ({
 
   return {
     style: {
-      animation: isStackable
-        ? `explosive-stack ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`
-        : `explosive-fall ${duration}s cubic-bezier(0.45, 0, 0.55, 1) forwards`,
+      animationName: isStackable ? "explosive-stack" : "explosive-fall",
+      animationDuration: `${duration}s`,
+      animationTimingFunction: "cubic-bezier(0.45, 0, 0.55, 1)",
+      animationFillMode: "forwards",
       "--start-x": `${cursorX - elementWidth / 2}px`,
       "--start-y": `${cursorY - elementHeight / 2}px`,
       "--final-x": `${finalX}px`,
@@ -83,7 +84,10 @@ export const calculateSpreadCloneStyle = ({
 
   return {
     style: {
-      animation: `spread ${duration}s cubic-bezier(0.4, 0, 0.2, 1) forwards`,
+      animationName: "spread",
+      animationDuration: `${duration}s`,
+      animationTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+      animationFillMode: "forwards",
       "--start-x": `${cursorX - elementWidth / 2}px`,
       "--start-y": `${cursorY - elementHeight / 2}px`,
       "--final-x": `${finalX}px`,
