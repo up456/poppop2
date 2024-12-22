@@ -1,16 +1,11 @@
-import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
-import { resolve } from "path"
-import dts from "vite-plugin-dts"
+import { defineConfig } from "vite"
 
 export default defineConfig({
-  plugins: [react(), dts({ include: ["src"] })],
+  plugins: [react()],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      formats: ["es", "cjs"],
-      name: "poppop2",
-      fileName: "index",
+      entry: "src/index.tsx",
     },
     rollupOptions: {
       external: ["react", "react-dom"],
@@ -21,6 +16,5 @@ export default defineConfig({
         },
       },
     },
-    minify: false,
   },
 })
