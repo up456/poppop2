@@ -20,35 +20,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # git 커밋을 위해 토큰 추가
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - name: Check and update version
+      - name: Git 설정
         run: |
-          # 현재 package.json 버전 가져오기
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+      - name: 버전 체크 및 업데이트
+        run: |
           CURRENT_VERSION=$(node -p "require('./package.json').version")
-          
-          # npm 레지스트리에서 최신 버전 가져오기 (실패시 0.0.0)
           LATEST_VERSION=$(npm view ${{ github.event.repository.name }} version 2>/dev/null || echo "0.0.0")
           
           echo "Current version: $CURRENT_VERSION"
           echo "Latest version: $LATEST_VERSION"
           
-          # 버전 비교 및 업데이트
           if [ "$CURRENT_VERSION" = "$LATEST_VERSION" ]; then
             echo "Incrementing patch version..."
-            npm version patch --no-git-tag-version
+            npm version patch
           elif npm view ${{ github.event.repository.name }}@$CURRENT_VERSION 2>/dev/null; then
             echo "Version $CURRENT_VERSION already exists, incrementing patch version..."
-            npm version patch --no-git-tag-version
+            npm version patch
           else
             echo "Using version from package.json: $CURRENT_VERSION"
+            # package.json의 현재 버전으로 git 태그 생성
+            git tag "v$CURRENT_VERSION"
           fi
           
-          # 최종 버전 출력
           NEW_VERSION=$(node -p "require('./package.json').version")
           echo "Version to publish: $NEW_VERSION"
+          
+          # 변경사항 커밋 및 푸시
+          git push
+          git push --tags
       - run: npm ci
       - run: npm run build
       - run: npm publish
