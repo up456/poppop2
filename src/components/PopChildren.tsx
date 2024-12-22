@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useState, useCallback, useRef, useEffect, type ReactNode } from "react"
-import { getPositionFromEvent } from "../utils"
-import "../styles/PopChildren.css"
+import { getPositionFromEvent, injectStyles } from "../utils"
 import { AnimationType } from "../animations"
 import { useCloneCreator } from "../hooks/useCloneCreator"
 
@@ -87,10 +86,12 @@ const PopChildrenBase = ({
 
     window.addEventListener("mousemove", handleGlobalMouseMove)
     window.addEventListener("touchmove", handleGlobalMouseMove)
+    const cleanup = injectStyles(styles)
 
     return () => {
       window.removeEventListener("mousemove", handleGlobalMouseMove)
       window.removeEventListener("touchmove", handleGlobalMouseMove)
+      cleanup
     }
   }, [])
 
@@ -125,3 +126,84 @@ export const PopChildren = (props: Props): React.JSX.Element => {
     return <>{props.children}</>
   }
 }
+
+const styles = `
+/* 컨테이너 스타일 */
+.pop-container {
+  display: inline-block;
+}
+
+/* 클릭 가능한 트리거 영역 스타일 */
+.pop-trigger {
+  cursor: pointer;
+}
+
+/* 복제된 요소의 기본 스타일 */
+.pop-clone {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none; /* 마우스 이벤트 무시 */
+  z-index: 1000; /* 다른 요소들 위에 표시 */
+}
+
+/* 요소가 폭발하고 사라지는 애니메이션 */
+@keyframes explosive-fall {
+  0% {
+    transform: translate(var(--start-x), var(--start-y)) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(calc(var(--start-x) + (var(--final-x) - var(--start-x)) * 0.5), var(--peak-y))
+      scale(var(--scale));
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(var(--final-x), var(--final-y)) scale(var(--scale));
+    opacity: var(--final-opacity);
+  }
+}
+
+/* 요소가 폭발하고 바닥에 쌓이는 애니메이션 */
+@keyframes explosive-stack {
+  0% {
+    transform: translate(var(--start-x), var(--start-y)) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(calc(var(--start-x) + (var(--final-x) - var(--start-x)) * 0.5), var(--peak-y))
+      scale(var(--scale)) rotate(calc(var(--rotation) * 0.5));
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(var(--final-x), var(--final-y)) scale(var(--scale)) rotate(var(--rotation));
+    opacity: 1;
+  }
+}
+
+/* 확산 애니메이션 */
+@keyframes spread {
+  0% {
+    transform: translate(var(--start-x), var(--start-y));
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--final-x), var(--final-y)) scale(var(--scale));
+    opacity: var(--final-opacity);
+  }
+}
+
+`

@@ -38,3 +38,18 @@ export const getPersistentClones = (clones: CloneItemType[], duration: number): 
 export const getRandomValue = (min: number, max: number): number => {
   return Math.random() * (max - min) + min
 }
+
+// 스타일 주입 유틸리티 함수
+export const injectStyles = (styles: string): (() => void) => {
+  if (typeof document !== "undefined") {
+    const styleElement = document.createElement("style")
+    styleElement.textContent = styles
+    document.head.appendChild(styleElement)
+
+    // cleanup 함수 반환
+    return () => {
+      document.head.removeChild(styleElement)
+    }
+  }
+  return () => {}
+}
